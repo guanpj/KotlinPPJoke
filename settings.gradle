@@ -1,0 +1,6 @@
+rootProject.name='KotlinPPJoke'
+include ':app'
+include ':libnavannotation'
+include ':libnavcompiler'
+include ':libnet'
+include ':libcommon'
