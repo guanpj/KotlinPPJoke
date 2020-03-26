@@ -59,9 +59,8 @@ abstract class AbsListFragment<T, M : AbsViewModel<T>> : Fragment(), OnLoadMoreL
     }
 
     private fun genericViewModel() {
-        //利用 子类传递的 泛型参数实例化出absViewModel 对象。
         val type: ParameterizedType = javaClass.genericSuperclass as ParameterizedType
-        val arguments: Array<Type> = type.getActualTypeArguments()
+        val arguments: Array<Type> = type.actualTypeArguments
         if (arguments.size > 1) {
             val argument: Type = arguments[1]
             val modelClz: Class<out AbsViewModel<*>> = (argument as Class<ViewModel>).asSubclass(AbsViewModel::class.java)
@@ -74,28 +73,24 @@ abstract class AbsListFragment<T, M : AbsViewModel<T>> : Fragment(), OnLoadMoreL
         }
     }
 
-    open fun submitList(result: PagedList<T>) {
+    private fun submitList(result: PagedList<T>) {
         if (result.size > 0) {
             adapter.submitList(result)
         }
         finishRefresh(result.size > 0)
     }
 
-    open fun finishRefresh(hasData: Boolean) {
+    private fun finishRefresh(hasData: Boolean) {
         var hasData = hasData
         val currentList = adapter.currentList
         hasData = hasData || currentList != null && currentList.size > 0
-        val state: RefreshState = binding.refreshLayout.getState()
+        val state: RefreshState = binding.refreshLayout.state
         if (state.isFooter && state.isOpening) {
             binding.refreshLayout.finishLoadMore()
         } else if (state.isHeader && state.isOpening) {
             binding.refreshLayout.finishRefresh()
         }
-        if (hasData) {
-            binding.refreshLayout.setVisibility(View.GONE)
-        } else {
-            binding.refreshLayout.setVisibility(View.VISIBLE)
-        }
+        binding.refreshLayout.visibility = if (hasData) View.GONE else View.VISIBLE
     }
 
 
