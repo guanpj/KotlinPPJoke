@@ -12,7 +12,7 @@ import java.util.*
 class HomeViewModel : AbsViewModel<Feed>() {
 
     @Volatile
-    var withCache = true
+    var withCache = false
 
     fun loadData(key: Int, callback: ItemKeyedDataSource.LoadCallback<Feed>) {
         val request = ApiService.getRequest<List<Feed>>("/feeds/queryHotFeedsList")
@@ -44,7 +44,7 @@ class HomeViewModel : AbsViewModel<Feed>() {
                 }
             }
 
-        } catch (e: CloneNotSupportedException) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

@@ -4,23 +4,18 @@ import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import com.me.guanpj.libcommon.view.ViewHelper.setViewOutline
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class CornerLinearLayout : FrameLayout {
+class CornerLinearLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
-    constructor(context: Context):
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?):
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int):
-            this(context, attributeSet, defStyleAttr, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int):
-            super(context, attributeSet, defStyleAttr, defStyleRes) {
-        ViewHelper.setViewOutline(this, attributeSet, defStyleAttr, defStyleRes);
+    init {
+        ViewHelper.setViewOutline(this, attrs, defStyleAttr, defStyleRes);
     }
 }

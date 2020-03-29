@@ -9,15 +9,11 @@ import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 
 
-class WindowInsetsFrameLayout : FrameLayout {
-    constructor(context: Context):
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?):
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int):
-            super(context, attributeSet, defStyleAttr)
+class WindowInsetsFrameLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     @RequiresApi(Build.VERSION_CODES.KITKAT_WATCH)
     override fun addView(child: View?) {

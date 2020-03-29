@@ -77,7 +77,7 @@ abstract class AbsListFragment<T, M : AbsViewModel<T>> : Fragment(), OnLoadMoreL
         if (result.size > 0) {
             adapter.submitList(result)
         }
-        finishRefresh(result.size > 0)
+        //finishRefresh(result.size > 0)
     }
 
     private fun finishRefresh(hasData: Boolean) {

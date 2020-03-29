@@ -1,42 +1,30 @@
 package com.me.guanpj.libcommon.view
 
 import android.content.Context
-import android.os.Build
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
-import com.me.guanpj.libcommon.R
 import com.me.guanpj.libcommon.databinding.LayoutEmptyViewBinding
 
 
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class EmptyView : LinearLayout {
+class EmptyView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
-    private lateinit var binding: LayoutEmptyViewBinding
+    private var binding: LayoutEmptyViewBinding
 
-    constructor(context: Context):
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?):
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int):
-            this(context, attributeSet, defStyleAttr, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int):
-            super(context, attributeSet, defStyleAttr, defStyleRes) {
+    init {
         orientation = VERTICAL
         gravity = Gravity.CENTER
 
-        binding = LayoutEmptyViewBinding.inflate(LayoutInflater.from(context))
+        binding = LayoutEmptyViewBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
     fun setEmptyIcon(@DrawableRes iconRes: Int) = binding.emptyIcon.setImageResource(iconRes)

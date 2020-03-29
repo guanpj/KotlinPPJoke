@@ -20,31 +20,40 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 
-class PPImageView : AppCompatImageView {
-    constructor(context: Context) :
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?) :
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) :
-            super(context, attributeSet, defStyleAttr)
+class PPImageView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : AppCompatImageView(context, attrs, defStyleAttr){
 
     companion object {
+        @JvmStatic
         @BindingAdapter("imageUrl", "isCircle")
-        fun setImageUrl(imageView: PPImageView, imageUrl: String, isCircle: Boolean) {
+        fun setImageUrl(imageView: PPImageView, imageUrl: String?, isCircle: Boolean?) {
             setImageUrl(imageView, imageUrl, isCircle, 0)
         }
 
+        @JvmStatic
         @SuppressLint("CheckResult")
         @BindingAdapter("imageUrl", "isCircle", "radius")
-        fun setImageUrl(view: PPImageView, imageUrl: String, isCircle: Boolean, radius: Int) {
+        fun setImageUrl(view: PPImageView, imageUrl: String?, isCircle: Boolean?, radius: Int?) {
             val builder = Glide.with(view).load(imageUrl)
-            if (isCircle) {
+            isCircle?.let { isCirCle ->
+                if (isCirCle) {
+                    builder.transform(CircleCrop())
+                } else {
+                    radius?.let {
+                        if (it > 0) {
+                            builder.transform(RoundedCornersTransformation(PixelUtils.dp2px(radius), 0))
+                        }
+                    }
+                }
+            }
+            /*if (isCircle) {
                 builder.transform(CircleCrop())
             } else if (radius > 0) {
                 builder.transform(RoundedCornersTransformation(PixelUtils.dp2px(radius), 0))
-            }
+            }*/
             val layoutParams = view.layoutParams
             if (layoutParams != null && layoutParams.width > 0 && layoutParams.height > 0) {
                 builder.override(layoutParams.width, layoutParams.height)
@@ -52,19 +61,22 @@ class PPImageView : AppCompatImageView {
             builder.into(view)
         }
 
+        @JvmStatic
         @BindingAdapter("blurUrl", "radius")
-        fun setBlurImageUrl(imageView: PPImageView, blurUrl: String, radius: Int) {
-            Glide.with(imageView).load(blurUrl).override(attr.radius)
-                .transform(BlurTransformation())
-                .dontAnimate()
-                .into(object : SimpleTarget<Drawable?>() {
-                    override fun onResourceReady(
-                        resource: Drawable,
-                        transition: Transition<in Drawable?>?
-                    ) {
-                        imageView.background = resource
-                    }
-                })
+        fun setBlurImageUrl(imageView: PPImageView, blurUrl: String?, radius: Int?) {
+            radius?.let {
+                Glide.with(imageView).load(blurUrl).override(it)
+                    .transform(BlurTransformation())
+                    .dontAnimate()
+                    .into(object : SimpleTarget<Drawable?>() {
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            transition: Transition<in Drawable?>?
+                        ) {
+                            imageView.background = resource
+                        }
+                    })
+            }
         }
     }
 

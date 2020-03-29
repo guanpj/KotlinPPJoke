@@ -6,36 +6,31 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import com.me.guanpj.kotlin.ppjoke.R
 import com.me.guanpj.kotlin.ppjoke.databinding.LayoutPlayerViewBinding
 import com.me.guanpj.libcommon.util.PixelUtils
 
 
-class ListPlayerView : FrameLayout {
+class ListPlayerView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
     var mCategory: String? = null
     var mVideoUrl: String? = null
     var isPlaying = false
     var mWidthPx = 0
     var mHeightPx = 0
 
-    private lateinit var binding: LayoutPlayerViewBinding
+    private var binding: LayoutPlayerViewBinding =
+        LayoutPlayerViewBinding.inflate(LayoutInflater.from(context), this)
 
-    constructor(context: Context):
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?):
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int):
-            this(context, attributeSet, defStyleAttr, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int, defStyleRes: Int):
-            super(context, attributeSet, defStyleAttr, defStyleRes) {
-        binding = LayoutPlayerViewBinding.inflate(LayoutInflater.from(context), this)
-    }
-
-    fun bindData(category: String, widthPx: Int, heightPx: Int, coverUrl: String, videoUrl: String) {
+    fun bindData(
+        category: String,
+        widthPx: Int,
+        heightPx: Int,
+        coverUrl: String,
+        videoUrl: String
+    ) {
         mCategory = category
         mVideoUrl = videoUrl
         mWidthPx = widthPx

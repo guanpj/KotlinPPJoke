@@ -14,19 +14,14 @@ import com.me.guanpj.kotlin.ppjoke.R
 import com.me.guanpj.kotlin.ppjoke.utils.AppConfig
 import com.me.guanpj.kotlin.ppjoke.utils.ScreenUtils
 
-class AppBottomNavBar : BottomNavigationView {
+class AppBottomNavBar @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     private val icons = intArrayOf(R.drawable.icon_tab_home, R.drawable.icon_tab_sofa, R.drawable.icon_tab_publish, R.drawable.icon_tab_find, R.drawable.icon_tab_mine)
     private val states = arrayOf(intArrayOf(android.R.attr.state_selected), intArrayOf())
-
-    constructor(context: Context):
-            this(context, null, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?):
-            this(context, attributeSet, 0)
-
-    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int):
-            super(context, attributeSet, defStyleAttr)
 
     init {
         initTabs()
