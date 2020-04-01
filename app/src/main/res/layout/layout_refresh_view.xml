@@ -7,8 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh_layout"
@@ -32,8 +31,8 @@
 
         <com.me.guanpj.libcommon.view.EmptyView
             android:id="@+id/empty_view"
-            android:layout_width="match_parent"
             android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </FrameLayout>

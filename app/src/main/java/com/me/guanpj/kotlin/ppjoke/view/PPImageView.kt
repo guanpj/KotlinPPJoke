@@ -38,8 +38,8 @@ class PPImageView @JvmOverloads constructor(
         @BindingAdapter("imageUrl", "isCircle", "radius")
         fun setImageUrl(view: PPImageView, imageUrl: String?, isCircle: Boolean?, radius: Int?) {
             val builder = Glide.with(view).load(imageUrl)
-            isCircle?.let { isCirCle ->
-                if (isCirCle) {
+            isCircle?.let { circle ->
+                if (circle) {
                     builder.transform(CircleCrop())
                 } else {
                     radius?.let {
@@ -62,7 +62,7 @@ class PPImageView @JvmOverloads constructor(
         }
 
         @JvmStatic
-        @BindingAdapter("blurUrl", "radius")
+        @BindingAdapter("blurImageUrl", "radius")
         fun setBlurImageUrl(imageView: PPImageView, blurUrl: String?, radius: Int?) {
             radius?.let {
                 Glide.with(imageView).load(blurUrl).override(it)
