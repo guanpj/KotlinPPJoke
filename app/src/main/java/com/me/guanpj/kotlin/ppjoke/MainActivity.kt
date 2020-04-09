@@ -12,11 +12,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.me.guanpj.kotlin.ppjoke.view.AppBottomNavBar
 import com.me.guanpj.kotlin.ppjoke.utils.NavGraphBuilder
+import com.me.guanpj.libcommon.util.StatusBar
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        StatusBar.fixSystemBar(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: AppBottomNavBar = findViewById(R.id.nav_view)

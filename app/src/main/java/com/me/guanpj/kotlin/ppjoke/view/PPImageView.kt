@@ -36,8 +36,8 @@ class PPImageView @JvmOverloads constructor(
         @JvmStatic
         @SuppressLint("CheckResult")
         @BindingAdapter("imageUrl", "isCircle", "radius")
-        fun setImageUrl(view: PPImageView, imageUrl: String?, isCircle: Boolean?, radius: Int?) {
-            val builder = Glide.with(view).load(imageUrl)
+        fun setImageUrl(imageView: PPImageView, imageUrl: String?, isCircle: Boolean?, radius: Int?) {
+            val builder = Glide.with(imageView).load(imageUrl)
             isCircle?.let { circle ->
                 if (circle) {
                     builder.transform(CircleCrop())
@@ -54,18 +54,18 @@ class PPImageView @JvmOverloads constructor(
             } else if (radius > 0) {
                 builder.transform(RoundedCornersTransformation(PixelUtils.dp2px(radius), 0))
             }*/
-            val layoutParams = view.layoutParams
+            val layoutParams = imageView.layoutParams
             if (layoutParams != null && layoutParams.width > 0 && layoutParams.height > 0) {
                 builder.override(layoutParams.width, layoutParams.height)
             }
-            builder.into(view)
+            builder.into(imageView)
         }
 
         @JvmStatic
         @BindingAdapter("blurImageUrl", "radius")
-        fun setBlurImageUrl(imageView: PPImageView, blurUrl: String?, radius: Int?) {
-            radius?.let {
-                Glide.with(imageView).load(blurUrl).override(it)
+        fun setBlurImageUrl(imageView: PPImageView, blurImageUrl: String?, radius: Int?) {
+            if (radius != null) {
+                Glide.with(imageView).load(blurImageUrl).override(radius)
                     .transform(BlurTransformation())
                     .dontAnimate()
                     .into(object : SimpleTarget<Drawable?>() {
