@@ -26,7 +26,6 @@ import java.lang.reflect.Type
 abstract class AbsListFragment<T, M : AbsViewModel<T>> : Fragment(), OnLoadMoreListener, OnRefreshListener {
     lateinit var binding: LayoutRefreshViewBinding
     val adapter by lazy { createAdapter() }
-
     protected var mViewModel: M? = null
 
     override fun onCreateView(
@@ -73,14 +72,14 @@ abstract class AbsListFragment<T, M : AbsViewModel<T>> : Fragment(), OnLoadMoreL
         }
     }
 
-    private fun submitList(result: PagedList<T>) {
+    protected fun submitList(result: PagedList<T>) {
         if (result.size > 0) {
             adapter.submitList(result)
         }
         finishRefresh(result.size > 0)
     }
 
-    private fun finishRefresh(hasData: Boolean) {
+    protected fun finishRefresh(hasData: Boolean) {
         var hasData = hasData
         val currentList = adapter.currentList
         hasData = hasData || currentList != null && currentList.size > 0
