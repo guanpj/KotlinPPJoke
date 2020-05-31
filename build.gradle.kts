@@ -6,9 +6,9 @@ buildscript {
         jcenter()
         maven("https://jitpack.io" )
 
-        /*maven("http://maven.aliyun.com/nexus/content/repositories/google")
+        maven("http://maven.aliyun.com/nexus/content/repositories/google")
         maven("http://maven.aliyun.com/nexus/content/groups/public/")
-        maven("http://maven.aliyun.com/nexus/content/repositories/jcenter")*/
+        maven("http://maven.aliyun.com/nexus/content/repositories/jcenter")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.0.0")
@@ -25,9 +25,9 @@ allprojects {
         jcenter()
         maven("https://jitpack.io" )
 
-        /*maven("http://maven.aliyun.com/nexus/content/repositories/google")
+        maven("http://maven.aliyun.com/nexus/content/repositories/google")
         maven("http://maven.aliyun.com/nexus/content/groups/public/")
-        maven("http://maven.aliyun.com/nexus/content/repositories/jcenter")*/
+        maven("http://maven.aliyun.com/nexus/content/repositories/jcenter")
     }
 }
 
