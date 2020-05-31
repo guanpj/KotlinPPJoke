@@ -1,5 +1,6 @@
 package com.me.guanpj.kotlin.ppjoke
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem

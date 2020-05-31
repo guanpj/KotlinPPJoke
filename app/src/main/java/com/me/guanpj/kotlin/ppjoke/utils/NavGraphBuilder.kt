@@ -18,19 +18,19 @@ object NavGraphBuilder {
         navigatorProvider.addNavigator(fragmentNavigator)
 
         val activityNavigator = navigatorProvider.getNavigator(ActivityNavigator::class.java)
-        var navGraph = NavGraph(NavGraphNavigator(navigatorProvider))
+        val navGraph = NavGraph(NavGraphNavigator(navigatorProvider))
 
-        var destConfig = AppConfig.destConfig
+        val destConfig = AppConfig.destConfig
         destConfig.values.forEach {
             if (it.isFragment) {
-                var destination = fragmentNavigator.createDestination()
+                val destination = fragmentNavigator.createDestination()
                 destination.className = it.className
                 destination.id = it.id
                 destination.addDeepLink(it.pageUrl)
 
                 navGraph.addDestination(destination)
             } else {
-                var destination = activityNavigator.createDestination()
+                val destination = activityNavigator.createDestination()
                 destination.setComponentName(ComponentName(AppGlobals.application.packageName, it.className))
                 destination.id = it.id
                 destination.addDeepLink(it.pageUrl)

@@ -15,7 +15,7 @@ object AppConfig {
 
     val bottomNavBarConfig: BottomNavBar by lazy {
         val content = parseFile("main_tabs_config.json")
-        Gson().fromJson(content, BottomNavBar::class.java)
+        Gson().fromJson<BottomNavBar>(content)
     }
 
     fun parseFile(fileName: String): String =
