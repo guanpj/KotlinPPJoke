@@ -13,7 +13,7 @@ fun main() {
     println(params)*/
 
     // Lambdas 表达式是花括号括起来的代码块。
-    items.fold(0, {
+    /*items.fold(0, {
         // 如果一个 lambda 表达式有参数，前面是参数，后跟“->”
             acc: Int, i: Int ->
         print("acc = $acc, i = $i, ")
@@ -29,7 +29,22 @@ fun main() {
     var a2 = a("aaa", b("bbab"))
 
     println(a1 == a2)
-    println(a1.equals(a2))
+    println(a1.equals(a2))*/
+
+    abc {
+        println("hhh")
+        return@abc
+    }
+}
+
+inline fun abc(say: () -> Unit) {
+    println("aaa")
+    say()
+    println("bbb")
+}
+
+fun ddd(say: () -> Unit) {
+    say()
 }
 
 data class a(var aa: String, var b: b)
